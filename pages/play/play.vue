@@ -34,24 +34,35 @@
 				<!-- 进度条 -->
 				<view class="slider-bar flex-box">
 					<view class="time">
-						
+						{{curPlayTimeNum}}
 					</view>
-			\		<slider class="line flex-item" :value="curPlayTime" min="0" block-size="15" 
+					<slider class="line flex-item" :value="curPlayTime" min="0" :max="playTime" block-size="15" 
+			@change = "sliderChange"
 			backgroundColor="rgba(255,255,255,.5)"
 			activeColor="rgba(255,255,255,.5)"
 			></slider>
 						<!-- 结束时间 -->
 						<view class="time end">
-							
+							{{playTimeNum}}
 						</view>
 				</view>
 				<!-- 下排图标 -->
 				<view class="btn-groups flex-box">
-					<view class="flex-item">
-						<view class="iconfont">
-							&#xe66c;
-						</view>
-					</view>
+					<!-- 播放模式 -->
+										<view class="flex-item" @click="setPlayModel()">
+											<!-- 列表循环 -->
+											<view v-if="playModel==0" class="iconfont">
+												&#xe66c;
+											</view>
+											<!-- 随机 -->
+											<view v-if="playModel==1" class="iconfont">
+												&#xe66b;
+											</view>
+											<!-- 单曲 -->
+											<view v-if="playModel==2" class="iconfont">
+												&#xe66d;
+											</view>
+										</view>
 					<view class="flex-item" @click="prevPlay()">
 						<view class="iconfont">
 							&#xe78a;
