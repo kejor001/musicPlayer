@@ -6,7 +6,7 @@
 				<block slot="left">
 					<image src="../../static/image/search/6.png" mode="widthFix" class="top-img"></image>
 				</block>
-				<view class="top-search flex-box">
+				<view class="top-search flex-box" @click="openSearch()">
 					<image src="../../static/image/search/2.png" mode="widthFix" class="search-icon debug"></image>
 					<text class="debug">蔡徐坤</text>
 				</view>
@@ -90,7 +90,7 @@
 				</mescroll-uni>
 			</view>
 		</view>
-		<search ref="search"></search>
+		<search ref="search" @close="closeSearch()"></search>
 	</view>
 </template>
 
@@ -232,6 +232,15 @@
 				},err=>{
 					errCallback&&errCallback(err);
 				})
+			},
+			//打开搜索页
+			openSearch() {
+				this.isShowSearch=true;
+				this.$refs.search.open();
+			},
+			//关闭搜索页
+			closeSearch() {
+				this.isShowSearch=false;
 			}
 		}
 	}

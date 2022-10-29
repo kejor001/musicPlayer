@@ -3,12 +3,22 @@ import Vuex from "vuex"
 
 Vue.use(Vuex)
 
+let storePlayList = [];
+try {
+	const vaule = uni.getStorageSync("playList");
+	if (value) {
+		storePlayList = JSON.parse(value);
+	}
+} catch(e) {}
+//=========
+
 const store = new Vuex.Store({
 	state: {
 		userInfo: {
 			hasLogin:false
 		},
 		leaveTime: 0,                 //记录app隐藏的开始时间
+		playList:storePlayList,
 	},
 	mutations: {
 		//记录app隐藏的开始时间
@@ -36,6 +46,11 @@ const store = new Vuex.Store({
 			state.userInfo = temp;
 			//清除storage
 			uni.removeStorageSync('userInfo');
+		},
+		//保存播放列表
+		storePlayList(state,payload) {
+			state.playList=payload;
+			uni.setStorageSync("playList", JSON.stringify(payload));
 		}
 	},
 	actions: {
